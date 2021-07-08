@@ -1,0 +1,6 @@
+host=localhost:8069
+users = 25
+spawn-rate = 0.05
+login = an_odoo_user
+password = the_users_password
+database = the_odoo_databse
