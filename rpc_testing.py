@@ -37,7 +37,7 @@ class RPC(OdooLocustUser):
 
         return super().on_start()
 
-    @task(15)
+    @task(10)
     def mycompassion(self):
         contract_model = self.client.get_model('recurring.contract')
         ids = contract_model.search([])
@@ -45,6 +45,19 @@ class RPC(OdooLocustUser):
         child_model = self.client.get_model("compassion.child")
         ids = child_model.search([("id", "=", contract["child_id"][0])])
         child = child_model.read(ids)
+
+
+    @task(5)
+    def read_communication(self):
+        comm_model = self.client.get_model('partner.communication.job')
+        comm_ids = comm_model.search([])
+        prtns = comm_model.read(choice(comm_ids))          
+        
+    @task(3)
+    def read_account_journal(self):
+        journal_model = self.client.get_model('account.journal')
+        journal_ids = journal_model.search([])
+        prtns = journal_model.read(choice(journal_ids))      
 
 
     @task(10)
